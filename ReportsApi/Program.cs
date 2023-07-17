@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using ReportsData;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,3 +30,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<ReportsContext>();
+    context.Database.Migrate();
+}

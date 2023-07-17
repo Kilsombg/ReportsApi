@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ReportsApi.Queries;
 using ReportsData;
 using ReportsDomain;
+using ReportsDomain.Events;
 
 namespace ReportsApi.Commands.CreateClient
 {
@@ -23,7 +24,11 @@ namespace ReportsApi.Commands.CreateClient
                 DDS = request.DDS,
                 Name = request.Name,
             };
-            await reportContext.CLients.AddAsync(entity);
+
+            entity.AddDomainEvent(new ClientEvent(entity));
+
+            reportContext.CLients.Add(entity);
+            await reportContext.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
         }

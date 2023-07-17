@@ -1,8 +1,7 @@
 ﻿namespace ReportsDomain
 {
-    public class Client
+    public class Client : BaseEntity
     {
-        public int Id { get; set; }
         public int ConfigId { get; set; }
         public string? Name { get; set; }
         public string? DDS { get; set; }

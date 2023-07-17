@@ -8,23 +8,17 @@ namespace ReportsApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ClientController : ControllerBase
+    public class ClientConfigController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public ClientController(IMediator mediator)
+        public ClientConfigController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
-        [HttpGet("{Id}")]
-        public async Task<Client> GetClient([FromRoute] GetClientQuery query)
-        {
-            return await mediator.Send(query);
-        }
-
         [HttpPost()]
-        public async Task<int> CreateClient([FromBody] CreateClientConfigCommand command)
+        public async Task<int> CreateClientConfig([FromBody] CreateClientConfigCommand command)
         {
             return await mediator.Send(command);
         }

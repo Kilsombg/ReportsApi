@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReportsDomain
 {
-    public class ClientConfig
+    public class ClientConfig : BaseEntity
     {
         public int Id { get; set; }
         public string? permittedReport { get; set; }
